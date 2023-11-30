@@ -1,42 +1,67 @@
-const choices = ["rock", "paper", "scissors"];
+const choices = ["Rock", "Paper", "Scissors"];
+const buttons = ["✊🏼", "✋🏼", "✌🏼"];
+const modes = ["🔅", "🌙"];
+const audio = new Audio("game-over.mp3");
 
-const replay = document.querySelector(".btn--reset");
+const modeSwitch = document.querySelector(".btn--switch");
 const playerChoice = document.querySelector(".player-choice");
 const computerChoice = document.querySelector(".computer-choice");
 const playerScore = document.querySelector(".player-score");
 const computerScore = document.querySelector(".computer-score");
 const winner = document.querySelector(".winner");
 const results = document.querySelector(".results");
+const details = document.querySelector(".results__details");
+const overall = document.querySelector(".overall-score");
+const dialog = document.querySelector("dialog");
+const dialogreplay = document.querySelector("dialog .btn--reset");
+const backdrop = document.querySelector(".backdrop");
+
+modeSwitch.addEventListener("click", () => {
+  modeSwitch.textContent = modes.reverse()[0];
+  document.body.classList.toggle("dark");
+});
+
+dialogreplay.addEventListener("click", () => {
+  dialog.close();
+  resetGame();
+});
+
 let playerScores = 0;
 let computerScores = 0;
 
+let gameStarted = false;
+
 function getComputerChoice() {
-  const random = Math.floor(Math.random() * 3);
-  console.log(choices[random]);
-  return choices[random];
+  return Math.floor(Math.random() * 3);
 }
 
 function playGame(playerSelection) {
-  playerSelection = playerSelection.toLowerCase();
+  if (!gameStarted) {
+    gameStarted = true;
+    details.classList.add("started");
+    results.classList.add("started");
+  }
+
   const computerSelection = getComputerChoice();
 
   let point = 0;
 
-  playerChoice.textContent = playerSelection;
-  computerChoice.textContent = computerSelection;
+  playerChoice.textContent = buttons[playerSelection];
+  computerChoice.textContent = buttons[computerSelection];
 
   if (playerSelection === computerSelection) {
-    results.textContent = "It's a tie!";
+    results.textContent = "Oh no!";
+    details.textContent = "It's a tie!";
   } else {
     switch (playerSelection) {
-      case choices[0]:
-        point = computerSelection === choices[1] ? 0 : 1;
+      case 0:
+        point = computerSelection === 1 ? 0 : 1;
         break;
-      case choices[1]:
-        point = computerSelection === choices[2] ? 0 : 1;
+      case 1:
+        point = computerSelection === 2 ? 0 : 1;
         break;
-      case choices[2]:
-        point = computerSelection === choices[0] ? 0 : 1;
+      case 2:
+        point = computerSelection === 0 ? 0 : 1;
         break;
       default:
         return;
@@ -46,20 +71,22 @@ function playGame(playerSelection) {
     if (point === 1) {
       playerScores++;
       playerScore.textContent = playerScores;
-      results.textContent = `You win! ${playerSelection} beats ${computerSelection}.`;
+      results.textContent = "You win!";
+      details.textContent = `${choices[playerSelection]} beats ${choices[computerSelection]}`;
     } else {
       computerScores++;
       computerScore.textContent = computerScores;
-      results.textContent = `You lose! ${computerSelection} beats ${playerSelection}.`;
+      results.textContent = "You lose!";
+      details.textContent = `${choices[computerSelection]} beats ${choices[playerSelection]}`;
     }
 
     // Check for winner
-    if (playerScores === 5) winner.textContent = "You win!";
-    if (computerScores === 5) winner.textContent = "You lose!";
-
-    // Show replay button
     if (playerScores === 5 || computerScores === 5) {
-      replay.classList.remove("hidden");
+      audio.play();
+      winner.textContent = playerScores === 5 ? "You won!" : "You lose!";
+      overall.textContent = `${playerScores} - ${computerScores}`;
+      dialog.showModal();
+      backdrop.classList.add("show");
     }
   }
 }
@@ -67,11 +94,20 @@ function playGame(playerSelection) {
 function resetGame() {
   playerScores = 0;
   computerScores = 0;
-  playerChoice.textContent = "";
-  computerChoice.textContent = "";
+
+  playerChoice.textContent = "?";
+  computerChoice.textContent = "?";
+
   playerScore.textContent = 0;
   computerScore.textContent = 0;
-  winner.textContent = "";
-  results.textContent = "";
-  replay.classList.add("hidden");
+
+  results.textContent = "Let's Play!";
+  details.textContent = "Earn 5 points to win";
+
+  gameStarted = false;
+
+  results.classList.remove("started");
+  details.classList.remove("started");
+
+  backdrop.classList.remove("show");
 }

@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  --title-color: var(--primary-color);
+  --title-shadow: 0 0 12px rgba(240, 128, 100, 0.9);
+  --heading-color: black;
+  --subheading-color: var(--secondary-color);
+  --primary-color: #f08080;
+  --primary-color-2: #f9865c;
+  --secondary-color: #313131;
+  --secondary-color-2: #ecd2b2;
+  --primary-bg: whitesmoke;
+  --secondary-bg: #fbfbe7;
+  --button-bg: lightgoldenrodyellow;
+  --button-color: darkgoldenrod;
+  --shadow: 0 0 12px rgba(1, 1, 1, 0.5);
+}
+
+body.dark {
+  background-color: #1a1818;
+  --title-color: whitesmoke;
+  --title-shadow: 0 0 12px rgb(122 75 130 / 90%);
+  --heading-color: #e2c8e2;
+  --subheading-color: plum;
+  --primary-color-2: plum;
+  --secondary-bg: #746274;
+  --secondary-color-2: white;
+  --primary-bg: #302430;
+  --button-bg: #bfb0bf;
+  --button-color: #250b25;
+}
+
+section {
+  margin: 2em;
+  text-align: center;
+}
+
+header .title {
+  text-align: center;
+  font-size: 1.75em;
+  color: var(--title-color);
+  text-shadow: var(--title-shadow);
+  clear: both;
+}
+
+.selection-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+  margin: 1.25em 0;
+}
+
+.btn {
+  border-style: none;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.selection-controls .btn {
+  background-color: var(--primary-bg);
+  font-size: 3em;
+  padding: 0.2em 0.25em;
+  text-shadow: var(--shadow);
+}
+
+.selection-controls .btn:hover {
+  text-shadow: 0 0 12px rgba(1, 1, 1, 0.5);
+}
+
+.btn--reset {
+  padding: 1em 1.5em;
+  font-weight: 600;
+  color: var(--button-color);
+  display: inline-flex;
+  gap: 0.5em;
+  background-color: var(--button-bg);
+  margin: 1em 0;
+}
+
+dialog .btn--reset {
+  margin-block: 1em 0;
+}
+
+.btn--switch {
+  font-size: 1.75em;
+  float: right;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  margin: 0 2em 0.5em;
+  padding: 0.15em;
+}
+
+body.dark .btn--switch {
+  background-color: var(--primary-bg);
+}
+
+.playground,
+.player-labels,
+.score-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.playground > span:not(.game-status),
+.player-labels > span:not(.blank),
+.score-chart > span:not(.blank) {
+  flex: 1;
+  border-radius: 10px;
+}
+
+body.dark .playground {
+  text-shadow: var(--shadow);
+}
+
+.playground {
+  margin-block: 0.5em 0.75em;
+}
+
+.player-labels {
+  margin-block: 0.5em 0.25em;
+}
+
+.blank,
+.game-status {
+  width: 20%;
+}
+
+body.dark .game-status {
+  color: white;
+}
+
+.choice {
+  font-size: 5em;
+  background-color: var(--secondary-bg);
+}
+
+.choice.unknown {
+  color: var(--secondary-color-2);
+  font-weight: 500;
+}
+
+.game-results__content .player-labels {
+  font-size: 2em;
+}
+
+.player-score,
+.computer-score {
+  font-size: 1.25em;
+  font-weight: 500;
+  color: var(--primary-color-2);
+}
+
+.game-results .results.started {
+  color: var(--heading-color);
+}
+
+body.dark .results {
+  color: var(--heading-color);
+}
+
+.results.started,
+.winner {
+  color: var(--primary-color-2);
+}
+
+body.dark .winner {
+  color: var(--primary-bg);
+}
+
+.results__details,
+.overall-score {
+  color: var(--subheading-color);
+}
+
+dialog.game-over {
+  padding: 1em;
+  margin: auto;
+  text-align: center;
+  width: 50%;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(1, 1, 1, 0.5);
+  background-color: #fdfdf6;
+}
+
+.game-over__content {
+  margin-block: 0.5em;
+  clear: both;
+}
+
+.game-over .winner {
+  margin-block: 0 0.5em;
+  font-size: 1.25em;
+}
+
+.backdrop.show {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(1, 1, 1, 0.25);
+}
+
+@media only screen and (min-width: 768px) {
+  header {
+    text-align: center;
+    margin-block: 2em 0;
+  }
+
+  .btn--switch {
+    float: none;
+  }
+
+  .playground,
+  .player-labels,
+  .score-chart {
+    max-width: 50%;
+    margin: 0.5em auto;
+  }
+
+  dialog {
+    max-width: 20%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .playground,
+  .player-labels,
+  .score-chart {
+    max-width: 40%;
+  }
+
+  dialog {
+    max-width: 15%;
+  }
+}

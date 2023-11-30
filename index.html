@@ -6,40 +6,58 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
+
+    <link rel="stylesheet" href="main.css" />
     <title>Rock Paper Scissors</title>
   </head>
   <body>
-    <header></header>
+    <header>
+      <button class="btn btn--switch">🌙</button>
+      <h1 class="title">Rock Paper Scissors</h1>
+    </header>
+    <div class="backdrop"></div>
+    <dialog class="game-over">
+      <!-- <button class="btn btn--close">✖</button> -->
+
+      <div class="game-over__content">
+        <h2 class="winner">You won!</h2>
+        <h4 class="overall-score">Overall Score</h4>
+        <button class="btn btn--reset"><span>↻</span>Replay</button>
+      </div>
+    </dialog>
     <main>
+      <section class="game-results">
+        <div class="game-results__content">
+          <h2 class="results">Let's Play!</h2>
+          <h4 class="results__details">Earn 5 points to win</h4>
+          <div class="player-labels">
+            <span>🧑🏻</span>
+            <span class="blank"></span>
+            <span>🤖</span>
+          </div>
+          <div class="playground">
+            <span class="choice player-choice unknown">?</span>
+            <span class="game-status">VS</span>
+            <span class="choice computer-choice unknown">?</span>
+          </div>
+          <div class="score-chart">
+            <span class="player-score">0</span>
+            <span class="blank"></span>
+            <span class="computer-score">0</span>
+          </div>
+        </div>
+      </section>
       <section class="user-selection">
         <div class="selection-controls">
-          <button class="btn btn--rock" onclick="playGame('rock')">
-            Rock
-          </button>
-          <button class="btn btn--paper" onclick="playGame('paper')">
-            Paper
-          </button>
-          <button class="btn btn--scissors" onclick="playGame('scissors')">
-            Scissors
+          <button class="btn btn--rock" onclick="playGame(0)">✊🏼</button>
+          <button class="btn btn--paper" onclick="playGame(1)">✋🏼</button>
+          <button class="btn btn--scissors" onclick="playGame(2)">
+            ✌🏼
           </button>
         </div>
         <button onclick="resetGame()" class="btn btn--reset">
-          Reset Game
+          <span>↻</span>Replay
         </button>
-      </section>
-
-      <section class="game-results">
-        <div class="game-results__content">
-          <h2>Game Results</h2>
-          <div>
-            <p>Player Choice: <span class="player-choice"></span></p>
-            <p>Player's Score: <span class="player-score">0</span></p>
-            <p>Computer Choice: <span class="computer-choice"></span></p>
-            <p>Computer's Score: <span class="computer-score">0</span></p>
-            <p>Results: <span class="results"></span></p>
-            <p>Winner: <span class="winner"></span></p>
-          </div>
-        </div>
       </section>
     </main>
     <footer></footer>
