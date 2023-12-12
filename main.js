@@ -1,6 +1,6 @@
 const choices = ["Rock", "Paper", "Scissors"];
 const buttons = ["✊🏼", "✋🏼", "✌🏼"];
-const modes = ["🔅", "🌙"];
+const modes = ["🌙", "🔅"];
 const audio = new Audio("game-over.mp3");
 
 const modeSwitch = document.querySelector(".btn--switch");
